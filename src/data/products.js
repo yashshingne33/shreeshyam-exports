@@ -1,9 +1,8 @@
-// Product catalogue. Follows Sitemap P02–P06 and the Outline sheet's per-product
-// section order (hero, formats & specifications, packaging & order details,
-// downloads & FAQ). Figures are marked "Typical" / "Indicative" per the brief's
-// Claims policy — treat as draft pending company evidence, not a guarantee.
-
-import coconutImg from "../assets/coconut6.jpg";
+// Import distinct images for each individual product
+import rawShellImg from "../assets/coconut6.jpg";
+import hookahCubesImg from "../assets/coconut5.jpg";
+import bbqBriquettesImg from "../assets/coconut4.jpg";
+import hexagonalImg from "../assets/coconut3.jpg";
 
 export const PRODUCTS = [
   {
@@ -13,7 +12,7 @@ export const PRODUCTS = [
     shortName: "Shell Charcoal",
     tagline: "Raw & screened",
     shape: "shell",
-    image: coconutImg,
+    image: rawShellImg,
     summary:
       "Raw coconut shell charcoal, screened to grade, for industrial blending, activated-carbon feedstock and general bulk offtake.",
     description:
@@ -43,7 +42,7 @@ export const PRODUCTS = [
     shortName: "Hookah Cubes",
     tagline: "Premium shisha cut",
     shape: "cube",
-    image: coconutImg,
+    image: hookahCubesImg,
     summary:
       "Precision-cut coconut charcoal cubes for hookah lounges, shisha brands and private-label retail packs.",
     description:
@@ -73,7 +72,7 @@ export const PRODUCTS = [
     shortName: "Briquettes",
     tagline: "BBQ & hospitality",
     shape: "briquette",
-    image: coconutImg,
+    image: bbqBriquettesImg,
     summary:
       "Dense, formed coconut charcoal briquettes for BBQ, foodservice and hospitality buyers who need a longer, steadier burn.",
     description:
@@ -103,7 +102,7 @@ export const PRODUCTS = [
     shortName: "Hexagonal Briquettes",
     tagline: "Conditional format",
     shape: "hex",
-    image: coconutImg,
+    image: hexagonalImg,
     conditional: true,
     summary:
       "An extruded hexagonal format, currently pending confirmation of the exact tile, stick or hollow-briquette shape before publication.",
