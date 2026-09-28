@@ -5,7 +5,9 @@ import Logo from "../components/Logo.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { PRODUCTS } from "../data/products.js";
 import { ORDERING_STEPS } from "../data/site.js";
-import heroImg from "../assets/hero-new.png";
+// import heroImg from "../assets/hero-new.png";
+// import heroImg from "../assets/hero-new2.png";
+import heroImg from "../assets/hero-new3.png";
 import groveImg from "../assets/hero2.png";
 
 /* ---------------------------------------------------------------------- */
@@ -351,10 +353,14 @@ function CompanyCredibility() {
     <section className="bg-white py-20 sm:py-24">
       <div className="container mx-auto max-w-content px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          
+          {/* Left Content */}
           <div className="order-2 lg:order-1">
-            <span className="text-xs font-semibold tracking-wide text-brass">Company credibility</span>
+            <span className="text-xs font-semibold tracking-wide text-brass uppercase">
+              Company credibility
+            </span>
             <h2 className="mt-2 font-display text-3xl font-medium text-charcoal sm:text-4xl">
-              A Dedicated Sourcing & Export Partner
+              A Dedicated Sourcing &amp; Export Partner
             </h2>
             <p className="mt-4 text-[15px] leading-relaxed text-charcoal/75">
               Shree Shyam Exports connects coconut shell supply with international buyers, working to the specification
@@ -376,11 +382,30 @@ function CompanyCredibility() {
             </div>
           </div>
 
-          <div className="order-1 overflow-hidden rounded-2xl lg:order-2">
-            <img src={groveImg} alt="Coconut palm groves in the highlands" className="h-full w-full object-cover" loading="lazy" />
+          {/* Right Image Block - Re-proportioned & Styled */}
+          <div className="order-1 lg:order-2 relative mx-auto w-full max-w-lg lg:max-w-none">
+            {/* Soft decorative background frame */}
+            <div className="absolute -inset-2 rounded-3xl bg-ivory/80 -rotate-1 sm:-rotate-2" />
+            
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-charcoal/10 bg-ivory shadow-lg">
+              <img
+                src={groveImg}
+                alt="Coconut palm groves in the highlands"
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="lazy"
+              />
+
+              {/* Floating detail badge */}
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto rounded-xl border border-white/20 bg-charcoal/75 px-4 py-3 backdrop-blur-md text-ivory shadow-xl">
+                <p className="text-[11px] font-semibold tracking-wider text-brass uppercase">Sourcing Origin</p>
+                <p className="text-xs text-ivory/90 mt-0.5 font-medium">Sustainable Palm Plantations</p>
+              </div>
+            </div>
           </div>
+
         </div>
 
+        {/* 3 Key Points */}
         <div className="mt-14 rounded-2xl border border-charcoal/10 bg-ivory/50 p-6 sm:p-8">
           <div className="grid gap-6 sm:grid-cols-3">
             {CREDIBILITY_POINTS.map((item, idx) => (
