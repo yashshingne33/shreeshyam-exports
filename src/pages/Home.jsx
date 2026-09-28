@@ -85,59 +85,88 @@ function Silhouette({ shape }) {
 
 function ProductRange() {
   return (
-    <section className="relative bg-ivory/60 py-24 sm:py-32">
+    <section className="relative bg-[#FAF8F5] py-24 sm:py-32">
       <div className="container mx-auto max-w-content px-6 lg:px-8">
-        <SectionHeading
-          kicker="Product range"
-          title="Choose the Format for Your Market"
-          body="Shell charcoal, briquettes, hookah cubes and confirmed hexagonal formats — each grade sorted from natural coconut shell."
-        />
+        
+        {/* Section Header with Top-Right Action Link */}
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-widest text-brass">
+              Product range
+            </span>
+            <h2 className="mt-2 font-display text-3xl font-medium text-charcoal sm:text-4xl lg:text-5xl">
+              Choose the Format for Your Market
+            </h2>
+            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-charcoal/70">
+              Shell charcoal, briquettes, hookah cubes and confirmed hexagonal formats — each grade sorted from natural coconut shell.
+            </p>
+          </div>
+          <Link
+            to="/products/"
+            className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold tracking-wide text-charcoal transition-colors hover:text-brass"
+          >
+            View all products <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+          </Link>
+        </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Card Grid in Reference Style */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCTS.map((product) => (
             <Link
               key={product.slug}
               to={`/products/${product.slug}/`}
-              className="group relative flex flex-col justify-between rounded-xl border border-charcoal/10 bg-white/70 p-7 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-brass/70 hover:bg-white hover:shadow-xl hover:shadow-brass/10"
+              className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-2xl border border-charcoal/10 bg-charcoal p-7 text-ivory shadow-md transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-charcoal/30"
             >
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-charcoal/5 p-2.5 text-brass transition-colors duration-300 group-hover:bg-brass group-hover:text-charcoal">
-                    <Silhouette shape={product.shape} />
-                  </div>
-                  {product.conditional ? (
-                    <span className="rounded-full border border-brass/30 bg-brass/10 px-2.5 py-0.5 text-[10px] font-medium tracking-wide text-brass">
-                      Conditional
-                    </span>
-                  ) : (
-                    <span className="text-[11px] font-medium tracking-wide text-charcoal/40">
-                      {product.tagline}
-                    </span>
-                  )}
-                </div>
+              {/* Full Background Image */}
+              <img
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
-                <div className="mt-4 aspect-[16/10] w-full overflow-hidden rounded-lg bg-charcoal/5">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+              {/* Dark Gradient Overlay for Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/70 to-charcoal/40 transition-opacity duration-300 group-hover:from-charcoal/90 group-hover:via-charcoal/60" />
 
-                <h3 className="mt-6 font-display text-xl font-medium text-charcoal transition-colors group-hover:text-brass">
-                  {product.shortName}
-                </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-charcoal/70">{product.summary}</p>
+              {/* Top Row: Icon & Tag */}
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-ivory backdrop-blur-md transition-colors duration-300 group-hover:bg-brass group-hover:text-charcoal">
+                  <Silhouette shape={product.shape} />
+                </div>
+                {product.conditional ? (
+                  <span className="rounded-full border border-brass/40 bg-brass/20 px-3 py-0.5 text-[10px] font-medium tracking-wide text-brass backdrop-blur-md">
+                    Conditional
+                  </span>
+                ) : (
+                  <span className="rounded-full bg-white/15 px-3 py-0.5 text-[10px] font-medium tracking-wide text-ivory/90 backdrop-blur-md">
+                    {product.tagline || "Available"}
+                  </span>
+                )}
               </div>
 
-              <div className="mt-8 flex items-center justify-between border-t border-charcoal/10 pt-4 text-xs font-semibold tracking-wide text-charcoal/80 transition-colors group-hover:text-brass">
-                <span>View specifications</span>
-                <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+              {/* Bottom Content Area */}
+              <div className="relative z-10 mt-auto pt-12">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-brass">
+                  Coconut Shell
+                </span>
+
+                <h3 className="mt-1 font-display text-2xl font-medium text-ivory transition-colors group-hover:text-brass">
+                  {product.shortName}
+                </h3>
+
+                <p className="mt-2.5 line-clamp-3 text-xs leading-relaxed text-ivory/80">
+                  {product.summary}
+                </p>
+
+                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-ivory transition-colors group-hover:text-brass">
+                  <span>Browse specifications</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                </div>
               </div>
             </Link>
           ))}
         </div>
+
       </div>
     </section>
   );
@@ -145,60 +174,107 @@ function ProductRange() {
 
 const APPLICATIONS = [
   {
-    category: "Hospitality & retail",
+    category: "Hospitality & Retail",
     title: "Hookah & Shisha Brands",
-    body: "Cube formats for lounges, distributors and private-label brands, cut to consistent sizes for even burning.",
-    specs: ["Retail or bulk packing", "Confirmed size ranges, e.g. 25–27mm", "Private-label boxes available"],
+    body: "Cube formats for lounges, distributors, and private-label brands, cut to consistent sizes for smooth, even burning and low ash.",
+    specs: ["Retail or bulk packing available", "Confirmed size ranges (e.g., 25–27mm)", "Custom private-label box branding"],
+    highlight: "High Demand Grade",
+    isPrimary: true,
   },
   {
-    category: "Commercial & foodservice",
+    category: "Commercial & Foodservice",
     title: "BBQ & Hospitality Buyers",
-    body: "Briquette and screened shell formats suited to commercial grilling and BBQ retail, with packaging matched to your volumes.",
-    specs: ["10kg / 20kg export cartons", "Confirmed specification sheet per grade", "Container-load palletisation"],
+    body: "Briquette and screened shell formats suited to commercial grilling and BBQ retail, with custom packaging matched to your container volumes.",
+    specs: ["10kg / 20kg heavy-duty export cartons", "Confirmed specification sheet per grade", "Container-load palletisation & stuffing"],
+    highlight: "Bulk Export Ready",
+    isPrimary: false,
   },
 ];
 
 function BuyerApplications() {
   return (
-    <section className="relative bg-white py-24 sm:py-32">
-      <div className="container mx-auto max-w-content px-6 lg:px-8">
+    <section className="relative bg-[#FAF8F5] py-24 sm:py-32 overflow-hidden">
+      {/* Decorative ambient background blur */}
+      <div className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-brass/10 blur-3xl" />
+
+      <div className="container relative z-10 mx-auto max-w-content px-6 lg:px-8">
         <SectionHeading
           kicker="Buyer applications"
           title="Built for Importers, Distributors & Brands"
           body="For hookah/shisha and BBQ buyers alike — every specification and packaging option is confirmed against your intended use before it ships."
         />
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2">
+        <div className="mt-16 grid gap-8 lg:grid-cols-12 lg:items-stretch">
           {APPLICATIONS.map((app) => (
             <div
               key={app.title}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-charcoal/10 bg-ivory/40 p-8 transition-all duration-300 hover:border-brass/60 hover:bg-ivory/80 hover:shadow-lg hover:shadow-brass/5 sm:p-10"
+              className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl p-8 sm:p-10 transition-all duration-500 hover:-translate-y-1.5 ${
+                app.isPrimary
+                  ? "lg:col-span-7 bg-charcoal text-ivory shadow-xl shadow-charcoal/20 border border-charcoal/20 hover:border-brass/50"
+                  : "lg:col-span-5 bg-white text-charcoal border border-charcoal/10 shadow-sm hover:border-brass/60 hover:shadow-xl hover:shadow-brass/5"
+              }`}
             >
-              <div className="absolute right-0 top-0 h-20 w-20 translate-x-8 -translate-y-8 rounded-full bg-brass/10 transition-transform duration-500 group-hover:scale-150" />
-              <div>
-                <span className="text-xs font-semibold tracking-wide text-brass">{app.category}</span>
-                <h3 className="mt-1 font-display text-2xl font-medium text-charcoal">{app.title}</h3>
-                <p className="mt-4 text-[15px] leading-relaxed text-charcoal/75">{app.body}</p>
+              {/* Decorative radial highlight effect */}
+              {app.isPrimary ? (
+                <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brass/15 blur-2xl transition-transform duration-700 group-hover:scale-125" />
+              ) : (
+                <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-brass/10 blur-xl transition-transform duration-700 group-hover:scale-150" />
+              )}
 
-                <ul className="mt-6 space-y-2.5 border-t border-charcoal/10 pt-6">
+              <div className="relative z-10">
+                {/* Header Tag Row */}
+                <div className="flex items-center justify-between gap-4">
+                  <span className={`text-[11px] font-semibold uppercase tracking-widest ${app.isPrimary ? "text-brass" : "text-brass"}`}>
+                    {app.category}
+                  </span>
+                  <span className={`rounded-full px-3 py-1 text-[10px] font-medium tracking-wide ${
+                    app.isPrimary 
+                      ? "border border-brass/30 bg-brass/10 text-brass backdrop-blur-sm" 
+                      : "bg-charcoal/5 text-charcoal/60"
+                  }`}>
+                    {app.highlight}
+                  </span>
+                </div>
+
+                {/* Title & Description */}
+                <h3 className={`mt-5 font-display text-2xl sm:text-3xl font-medium tracking-tight ${app.isPrimary ? "text-ivory" : "text-charcoal"}`}>
+                  {app.title}
+                </h3>
+                <p className={`mt-4 text-[15px] leading-relaxed ${app.isPrimary ? "text-ivory/80" : "text-charcoal/75"}`}>
+                  {app.body}
+                </p>
+
+                {/* Spec List */}
+                <ul className={`mt-8 space-y-3.5 border-t pt-6 ${app.isPrimary ? "border-ivory/15" : "border-charcoal/10"}`}>
                   {app.specs.map((item) => (
-                    <li key={item} className="flex items-center gap-2.5 text-[13px] text-charcoal/80">
-                      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-brass/20 text-brass">
+                    <li key={item} className="flex items-start gap-3 text-xs sm:text-[13px]">
+                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full mt-0.5 ${
+                        app.isPrimary ? "bg-brass/20 text-brass" : "bg-brass/15 text-brass"
+                      }`}>
                         &#10003;
                       </span>
-                      <span>{item}</span>
+                      <span className={app.isPrimary ? "text-ivory/90 font-medium" : "text-charcoal/80 font-medium"}>
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <Link
-                to="/request-a-quote/"
-                className="mt-8 inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide text-charcoal/80 transition-colors group-hover:text-brass"
-              >
-                Request specifications
-                <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
-              </Link>
+              {/* Action Button */}
+              <div className="relative z-10 mt-10 pt-4">
+                <Link
+                  to="/request-a-quote/"
+                  className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-semibold tracking-wide transition-all ${
+                    app.isPrimary
+                      ? "bg-brass text-charcoal hover:bg-[#c2a877] shadow-lg shadow-brass/20"
+                      : "border border-charcoal/20 bg-charcoal text-ivory hover:bg-charcoal/90"
+                  }`}
+                >
+                  <span>Request specifications</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -310,33 +386,99 @@ function PackagingPreview() {
   );
 }
 
+
 function OrderingProcess() {
   return (
-    <section className="bg-ivory/50 py-20 sm:py-24">
-      <div className="container mx-auto max-w-content px-6 lg:px-8">
-        <SectionHeading
-          kicker="Ordering process"
-          title="Share Requirements → Confirm Specification → Agree Order → Prepare Shipment"
-          body="A transparent, four-step path from first enquiry to dispatch, without a fixed universal lead time."
-          align="center"
-        />
+    <section className="relative overflow-hidden bg-white py-24 sm:py-32">
+      {/* Decorative Gradient Glows in Background */}
+      <div className="pointer-events-none absolute -left-20 top-1/3 h-96 w-96 rounded-full bg-brass/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 bottom-10 h-80 w-80 rounded-full bg-brass/10 blur-3xl" />
 
-        <div className="relative mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {ORDERING_STEPS.map((step) => (
-            <div
-              key={step.n}
-              className="group flex flex-col justify-between rounded-xl border border-charcoal/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brass hover:shadow-lg hover:shadow-brass/10"
-            >
-              <div>
-                <span className="font-display text-2xl font-medium text-brass">{step.n}</span>
-                <h3 className="mt-4 font-display text-lg font-medium text-charcoal transition-colors group-hover:text-brass">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-charcoal/70">{step.body}</p>
-              </div>
-            </div>
-          ))}
+      <div className="container relative z-10 mx-auto max-w-content px-6 lg:px-8">
+        
+        {/* Section Heading */}
+        <div className="text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brass/30 bg-brass/10 px-4 py-1.5 text-xs font-semibold tracking-widest text-brass uppercase">
+            <span className="h-1.5 w-1.5 rounded-full bg-brass animate-ping" />
+            Seamless Fulfillment
+          </span>
+          <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-medium tracking-tight text-charcoal sm:text-5xl">
+            A Clear, 4-Step Path to Shipment
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-charcoal/70">
+            A transparent journey from your initial inquiry to container dispatch, tailored to your exact specification.
+          </p>
         </div>
+
+        {/* Dynamic Stepped Process Cards */}
+        <div className="relative mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          
+          {/* Connecting Line across cards (Desktop) */}
+          <div className="pointer-events-none absolute top-1/2 left-[10%] right-[10%] hidden -translate-y-1/2 border-t-2 border-dashed border-brass/30 lg:block" />
+
+          {ORDERING_STEPS.map((step, idx) => {
+            // Apply unique vertical offsets for a staircase visual rhythm
+            const offsets = [
+              "lg:-translate-y-4",
+              "lg:translate-y-4",
+              "lg:-translate-y-2",
+              "lg:translate-y-6",
+            ];
+
+            return (
+              <div
+                key={step.n || idx}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-charcoal/10 bg-[#FAF8F5] p-8 shadow-sm transition-all duration-500 hover:z-20 hover:-translate-y-2 hover:border-brass hover:bg-white hover:shadow-2xl hover:shadow-brass/15 ${offsets[idx % 4]}`}
+              >
+                {/* Glowing Corner Accent on Hover */}
+                <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-brass/15 blur-xl transition-transform duration-500 group-hover:scale-150" />
+
+                <div>
+                  {/* Step Badge & Number */}
+                  <div className="flex items-center justify-between">
+                    <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-charcoal font-display text-xl font-bold text-brass shadow-md transition-all duration-300 group-hover:scale-110 group-hover:bg-brass group-hover:text-charcoal group-hover:shadow-brass/30">
+                      {step.n || `0${idx + 1}`}
+                    </div>
+                    
+                    {/* Step indicator tag */}
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-charcoal/30 transition-colors group-hover:text-brass">
+                      Phase 0{idx + 1}
+                    </span>
+                  </div>
+
+                  {/* Step Title */}
+                  <h3 className="mt-8 font-display text-2xl font-medium tracking-tight text-charcoal transition-colors group-hover:text-brass">
+                    {step.title}
+                  </h3>
+
+                  {/* Step Description */}
+                  <p className="mt-3 text-xs sm:text-[13px] leading-relaxed text-charcoal/70">
+                    {step.body}
+                  </p>
+                </div>
+
+                {/* Bottom Interactive Arrow Bar */}
+                <div className="mt-8 flex items-center justify-between border-t border-charcoal/10 pt-4 text-xs font-semibold tracking-wide text-charcoal/60 transition-colors group-hover:text-brass">
+                  <span>Next Step</span>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-charcoal/5 transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-brass group-hover:text-charcoal">
+                    &rarr;
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Callout Ribbon */}
+        <div className="mt-20 text-center">
+          <p className="text-xs font-medium text-charcoal/60 sm:text-sm">
+            Need a custom schedule or private-label timeline?{" "}
+            <a href="/request-a-quote/" className="font-semibold text-brass underline underline-offset-4 hover:text-charcoal">
+              Talk directly with our export desk &rarr;
+            </a>
+          </p>
+        </div>
+
       </div>
     </section>
   );
