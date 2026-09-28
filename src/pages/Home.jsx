@@ -419,11 +419,20 @@ function PackagingPreview() {
   );
 }
 
-/* --------------------------- Ordering process ------------------------- */
+const unsplash = (id) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
+
+// Free-to-use Unsplash photos (Unsplash License, no attribution required)
+const STEP_IMAGES = [
+  unsplash("photo-1678182451047-196f22a4143e"), // 1 Containers stacked (Ali Mkumbwa)
+  unsplash("photo-1706499856012-14f062c72b49"), // 2 Crane over container stack (taro ohtani)
+  unsplash("photo-1673896493356-6684ede37a7d"), // 3 Harbor cranes (Foto K.)
+  unsplash("photo-1691591765923-3bd6f12f4209"), // 4 Cargo ship with crane (Elijah Mears)
+];
 
 function OrderingProcess() {
   return (
-    <section className={`bg-[#FAF8F5] ${SECTION}`}>
+    <section className={`overflow-hidden bg-[#FAF8F5] ${SECTION}`}>
       <div className={WRAP}>
         <div className="text-center">
           <span className="inline-flex items-center rounded-full border border-brass/40 bg-brass/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brass">
@@ -435,34 +444,67 @@ function OrderingProcess() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
-          {ORDERING_STEPS.map((step, idx) => (
-            <div key={step.n || idx} className={`group flex flex-col justify-between p-6 sm:p-7 ${CARD}`}>
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal font-display text-lg font-bold text-brass transition-colors duration-300 group-hover:bg-brass group-hover:text-charcoal">
-                    {step.n || `0${idx + 1}`}
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-charcoal/40 transition-colors group-hover:text-brass">
+        {/* Extra bottom padding leaves room for the lowered cards on desktop */}
+        <div className="relative mt-12 sm:mt-16 lg:pb-14">
+          {/* Wavy route line that runs up and down behind the cards (desktop only) */}
+          <svg
+            className="pointer-events-none absolute left-0 top-24 hidden h-32 w-full lg:block"
+            viewBox="0 0 1000 120"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 30 C 125 30, 125 90, 250 90 S 375 30, 500 30 S 625 90, 750 90 S 875 30, 1000 30"
+              fill="none"
+              stroke="#AF9560"
+              strokeWidth="2"
+              strokeDasharray="7 7"
+              strokeOpacity="0.55"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+
+          <div className="relative grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+            {ORDERING_STEPS.map((step, idx) => (
+              <article
+                key={step.n || idx}
+                /* up / down stagger: odd cards drop lower on desktop */
+                className={`group flex flex-col overflow-hidden rounded-2xl border border-charcoal/10 bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:border-brass hover:shadow-xl ${
+                  idx % 2 === 1 ? "lg:mt-14" : "lg:mt-0"
+                }`}
+              >
+                {/* Image header */}
+                <div className="relative h-40 w-full overflow-hidden bg-gradient-to-br from-brass/30 via-[#FAF8F5] to-brass/10 sm:h-44">
+                  <img
+                    src={STEP_IMAGES[idx % STEP_IMAGES.length]}
+                    alt=""
+                    loading="lazy"
+                    onError={(e) => (e.currentTarget.style.display = "none")}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/35 to-transparent" />
+                  <span className="absolute right-3 top-3 rounded-full bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-charcoal shadow">
                     Phase 0{idx + 1}
                   </span>
                 </div>
 
-                <h3 className="mt-6 font-display text-xl font-medium text-charcoal sm:text-2xl">{step.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-charcoal/75">{step.body}</p>
-              </div>
+                {/* Number badge overlaps the image edge */}
+                <div className="relative px-6 pb-6 sm:px-7 sm:pb-7">
+                  <div className="-mt-7 flex h-14 w-14 items-center justify-center rounded-2xl border-4 border-white bg-charcoal font-display text-xl font-bold text-brass shadow-lg transition-colors duration-300 group-hover:bg-brass group-hover:text-charcoal">
+                    {step.n || `0${idx + 1}`}
+                  </div>
 
-              <div className="mt-6 flex items-center justify-between border-t border-charcoal/10 pt-4 text-xs font-semibold text-charcoal/65 transition-colors group-hover:text-brass">
-                <span>Next Step</span>
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-charcoal/5 transition-all duration-300 group-hover:translate-x-1 group-hover:bg-brass group-hover:text-charcoal">
-                  &rarr;
-                </span>
-              </div>
-            </div>
-          ))}
+                  <h3 className="mt-4 font-display text-xl font-medium text-charcoal transition-colors group-hover:text-brass sm:text-2xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-charcoal/75">{step.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <p className="mt-12 text-center text-sm font-medium text-charcoal/70">
+        <p className="mt-10 text-center text-sm font-medium text-charcoal/70">
           Need a custom schedule or private-label timeline?{" "}
           <Link to="/request-a-quote/" className="font-semibold text-brass underline underline-offset-4 hover:text-charcoal">
             Talk directly with our export desk &rarr;
