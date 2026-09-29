@@ -614,12 +614,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <CompanyCredibility />
       <ProductRange />
       <BuyerApplications />
       <QualityPreview />
       <PackagingPreview />
       <OrderingProcess />
-      <CompanyCredibility />
       <ClosingEnquiry />
     </>
   );
