@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../Logo.jsx";
 import { NAV_PRODUCTS, NAV_COMPANY, COMPANY } from "../../data/site.js";
@@ -21,28 +21,39 @@ function NavDropdown({ label, links, isDark }) {
           isDark ? "text-ivory/85 hover:text-ivory" : "text-ink-soft hover:text-charcoal"
         }`}
         aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="true"
+        onClick={() => setOpen(true)}
       >
         {label}
-        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" className={`transition-transform ${open ? "rotate-180" : ""}`}>
+        <svg
+          width="10"
+          height="6"
+          viewBox="0 0 10 6"
+          fill="none"
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        >
           <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
       </button>
 
-      {open && (
-        <div className="absolute left-1/2 top-full mt-3 w-64 -translate-x-1/2 rounded-sm border border-charcoal/10 bg-ivory py-2 shadow-xl">
+      <div
+        className={`absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3 transition-all duration-200 ease-out ${
+          open ? "visible translate-y-0 opacity-100" : "invisible translate-y-1 opacity-0"
+        }`}
+      >
+        <div className="rounded-lg border border-charcoal/10 bg-ivory p-1.5 shadow-lg">
           {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className="block px-5 py-2.5 text-[14px] text-ink-soft hover:bg-charcoal/5 hover:text-charcoal"
               onClick={() => setOpen(false)}
+              className="block rounded-md px-3.5 py-2.5 text-[14px] text-ink-soft transition-colors hover:bg-charcoal/5 hover:text-charcoal"
             >
               {link.label}
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
