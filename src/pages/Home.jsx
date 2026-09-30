@@ -5,19 +5,8 @@ import Logo from "../components/Logo.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { PRODUCTS } from "../data/products.js";
 import { ORDERING_STEPS } from "../data/site.js";
-import heroImg from "../assets/hero-new3.png";
+import heroImg from "../assets/hero-new.png";
 import groveImg from "../assets/coconut2.jpg";
-
-/* ---------------------------------------------------------------------- */
-/*  Home (P01) — Hero → Product range → Buyer applications → Quality      */
-/*  preview → Packaging preview → Ordering process → Company credibility  */
-/*  → Closing enquiry.                                                    */
-/*                                                                        */
-/*  Design rules used throughout (for consistency):                       */
-/*  - Sections alternate white / warm-ivory backgrounds; no blur effects. */
-/*  - One section rhythm (SECTION), one kicker style, one button set.     */
-/*  - Cards: rounded-2xl, thin border, light shadow, hover lift.          */
-/* ---------------------------------------------------------------------- */
 
 const SECTION = "py-16 sm:py-20 lg:py-24";
 const WRAP = "container mx-auto max-w-content px-5 sm:px-6 lg:px-8";

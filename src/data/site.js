@@ -8,7 +8,7 @@ export const COMPANY = {
   email: "export@shreeshyamexports.com", // UPDATE BEFORE LAUNCH
   phone: "+91 98765 43210", // UPDATE BEFORE LAUNCH
   whatsapp: "919876543210", // UPDATE BEFORE LAUNCH — digits only, with country code
-  address: "Tuticorin, Tamil Nadu, India", // UPDATE BEFORE LAUNCH
+  address: "Nagpur, Maharashtra, India", 
   hours: "Mon–Sat, 9:00–18:00 IST",
 };
 
